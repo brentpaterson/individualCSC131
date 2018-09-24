@@ -31,15 +31,21 @@ public class wc {
     }
 
     private static void analyzeFile() {
+        Boolean fileExists = false;
         for (int i = 0; i < argsHolder.length; i++) {
             // is a file?
             if (argsHolder[i].charAt(0) != '-') {
+                fileExists = true;
                 runFile(argsHolder[i]);
             }
         }
 
-        // output total
-        outputTotal();
+        // output total if there was a file, otherwise instructions
+        if (fileExists) {
+            outputTotal();
+        } else {
+            instructions();
+        }
     }
 
     private static void runFile(String file) {
@@ -54,11 +60,10 @@ public class wc {
                 if (line != null) {
                     lines++;
 
+                    // get words in line
                     String trim = line.trim();
-                    if (!trim.isEmpty()) {
+                    if (!trim.isEmpty())
                         words += trim.split("\\s+").length;
-
-                    }
 
                     chars += line.length();
                 } else {
@@ -79,7 +84,7 @@ public class wc {
 
     private static void output(long lines, long words, long chars, String file) {
 
-
+        // find what params were given for output
         for (int i = 0; i < argsHolder.length; i++) {
             if (argsHolder[i].charAt(0) == '-') {
                 if (argsHolder[i].contains("l"))
@@ -91,7 +96,7 @@ public class wc {
             }
         }
 
-        // print all
+        // no params, all true
         if (!l && !w && !c) {
             l = true;
             w = true;
