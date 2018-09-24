@@ -1,3 +1,7 @@
+/* Brent Paterson
+ * CSC131
+ * Individual sprint 1, wc.java
+ */
 import java.io.*;
 
 public class wc {
