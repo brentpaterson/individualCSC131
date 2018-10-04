@@ -3,6 +3,17 @@
  * Individual sprint 2, Metrics.java
  */
 import java.io.*;
+import java.util.*;
+
+class Files {
+    public int lines, words, chars, sources, comments;
+    public String name;
+
+    public Files() {
+        lines = words = chars = sources = comments = 0;
+        name = null;
+    }
+}
 
 public class Metrics {
     private static String[] argsHolder;
@@ -13,9 +24,11 @@ public class Metrics {
     private static Boolean w = false;
     private static Boolean c = false;
 
+    LinkedList files = new LinkedList<Files>();
+
     public static void main(String[] args) {
         // check for help request
-        //Boolean h = false;
+        Boolean h = false;
         for (int i = 0; i < args.length; i++) {
             if (args[i].charAt(0) == '-' && args[i].contains("h")) {
                 h = true;
@@ -30,6 +43,14 @@ public class Metrics {
             // no args or help requested
             instructions();
         }
+
+
+        //TESTING//////////////////////////////
+        Files test = new Files();
+        test.name = "test";
+        test.words = 50;
+        System.out.println(test.name + " " + test.words);
+
     }
 
     private static void instructions() {
