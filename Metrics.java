@@ -25,10 +25,20 @@ public class Metrics {
     private static Boolean c = false;
 
     public static void main(String[] args) {
+        // check for help request
+        Boolean h = false;
+        for (int i = 0; i < args.length; i++) {
+            if (args[i].charAt(0) == '-' && args[i].contains("h")) {
+                h = true;
+                break;
+            }
+        }
+
         argsHolder = args;
-        if (args.length > 0) {
+        if (args.length > 0 && !h) {
             analyzeFile();
         } else {
+            // no args or help requested
             instructions();
         }
     }
@@ -47,12 +57,6 @@ public class Metrics {
     private static void analyzeFile() {
         Boolean fileExists = false;
         for (int i = 0; i < argsHolder.length; i++) {
-            // asking for help?
-            if (argsHolder[i].contains("h") && argsHolder[i].charAt(0) == '-') {
-                // break for, print instructions and end program
-                fileExists = false;
-                break;
-            }
             // is a file?
             if (argsHolder[i].charAt(0) != '-') {
                 fileExists = true;
