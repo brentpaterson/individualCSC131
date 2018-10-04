@@ -36,8 +36,7 @@ public class Metrics {
     private static Boolean c = false;
     private static Boolean s = false;
     private static Boolean C = false;
-    private static Boolean java = true;
-    private static Boolean cpp = true;
+    private static Boolean programmingFile = false;
 
     private static LinkedList<Files> filesHolder = new LinkedList<Files>();
 
@@ -88,6 +87,8 @@ public class Metrics {
             if (argsHolder[i].charAt(0) != '-') {
                 fileExists = true;
                 runFile(argsHolder[i]);
+                if (programFileChecker(argsHolder[i]))
+                    programmingFile = true;
             }
         }
 
@@ -157,16 +158,31 @@ public class Metrics {
             l = w = c = s = C = true;
         }
 
+        long max = 0;
+        if (l)
+            max = Math.max(totalLines, max);
+        if (w)
+            max = Math.max(totalWords, max);
+        if (c)
+            max = Math.max(totalChars, max);
+        if (s)
+            max = Math.max(totalSources, max);
+        if (C)
+            max = Math.max(totalComments, max);
+
+        int maxDigits = String.valueOf(max).length();
+
         while (!filesHolder.isEmpty()) {
             Files temp = filesHolder.pop();
             String tempName = temp.name;
-            long tempLines = temp.lines;
-            long tempWords = temp.words;
-            long tempChars = temp.chars;
-            long tempSources = temp.sources;
-            long tempComments = temp.comments;
+            long lines = temp.lines;
+            long words = temp.words;
+            long chars = temp.chars;
+            long sources = temp.sources;
+            long comments = temp.comments;
 
             
+
         }
 
 
@@ -189,5 +205,17 @@ public class Metrics {
             System.out.print(totalChars + " ");
 
         System.out.print("total\n");
+    }
+
+    private static boolean programFileChecker(String name) {
+        if (name.endsWith(".java")
+                || name.endsWith(".cpp")
+                || name.endsWith(".c")
+                || name.endsWith(".class")
+                || name.endsWith(".hpp")
+                || name.endsWith(".h")) {
+            return true;
+        }
+        return false;
     }
 }
