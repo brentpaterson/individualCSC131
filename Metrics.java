@@ -6,7 +6,7 @@ import java.io.*;
 import java.util.*;
 
 class Files {
-    public int lines, words, chars, sources, comments;
+    public long lines, words, chars, sources, comments;
     public String name;
 
     public Files() {
@@ -14,7 +14,7 @@ class Files {
         name = null;
     }
 
-    public Files(String n, int l, int w, int c, int s, int com) {
+    public Files(String n, long l, long w, long c, long s, long com) {
         name = n;
         lines = l;
         words = w;
@@ -29,9 +29,15 @@ public class Metrics {
     private static long totalLines = 0;
     private static long totalWords = 0;
     private static long totalChars = 0;
+    private static long totalSources = 0;
+    private static long totalComments = 0;
     private static Boolean l = false;
     private static Boolean w = false;
     private static Boolean c = false;
+    private static Boolean s = false;
+    private static Boolean C = false;
+    private static Boolean java = true;
+    private static Boolean cpp = true;
 
     private static LinkedList<Files> filesHolder = new LinkedList<Files>();
 
@@ -87,7 +93,7 @@ public class Metrics {
 
         // output total if there was a file, otherwise instructions
         if (fileExists) {
-            outputTotal();
+            output();
         } else {
             instructions();
         }
@@ -96,9 +102,8 @@ public class Metrics {
     private static void runFile(String file) {
         try {
             BufferedReader reader = new BufferedReader(new FileReader(new File(file)));
-            long lines = 0;
-            long words = 0;
-            long chars = 0;
+            long lines, words, chars, sources, comments;
+            lines = words = chars = sources = comments = 0;
 
             while (true) {
                 String line = reader.readLine();
@@ -115,20 +120,21 @@ public class Metrics {
                 }
             }
 
-            Files temp = new Files();
-
             totalLines += lines;
             totalWords += words;
             totalChars += chars;
+            totalSources += sources;
+            totalComments += comments;
 
-            output(lines, words, chars, file);
+            Files temp = new Files(file, lines, words, chars, 0, 0);
+            filesHolder.add(temp);
         } catch (Exception e) {
             instructions();
             System.out.println("Error: " + e);
         }
     }
 
-    private static void output(long lines, long words, long chars, String file) {
+    private static void output() {
 
         // find what params were given for output
         for (int i = 0; i < argsHolder.length; i++) {
@@ -139,15 +145,30 @@ public class Metrics {
                     w = true;
                 if (argsHolder[i].contains("c"))
                     c = true;
+                if (argsHolder[i].contains("s"))
+                    s = true;
+                if (argsHolder[i].contains("C"))
+                    C = true;
             }
         }
 
         // no params, all true
-        if (!l && !w && !c) {
-            l = true;
-            w = true;
-            c = true;
+        if (!l && !w && !c && !s && !C) {
+            l = w = c = s = C = true;
         }
+
+        while (!filesHolder.isEmpty()) {
+            Files temp = filesHolder.pop();
+            String tempName = temp.name;
+            long tempLines = temp.lines;
+            long tempWords = temp.words;
+            long tempChars = temp.chars;
+            long tempSources = temp.sources;
+            long tempComments = temp.comments;
+
+            
+        }
+
 
         if (l)
             System.out.print(lines + " ");
