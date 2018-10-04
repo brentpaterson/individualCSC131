@@ -27,6 +27,8 @@ public class Metrics {
                 "wc -l <filename> will print the line count of a file\n" +
                 "wc -c <filename> will print the character count\n" +
                 "wc -w <filename> will print the word count\n" +
+                "wc -s <filename> will print the source lines count\n" +
+                "wc -C <filename> will print the comment lines count\n" +
                 "wc <filename> will print all of the above");
     }
 
