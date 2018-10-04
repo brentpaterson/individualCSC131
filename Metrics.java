@@ -13,6 +13,15 @@ class Files {
         lines = words = chars = sources = comments = 0;
         name = null;
     }
+
+    public Files(String n, int l, int w, int c, int s, int com) {
+        name = n;
+        lines = l;
+        words = w;
+        chars = c;
+        sources = s;
+        comments = com;
+    }
 }
 
 public class Metrics {
@@ -24,7 +33,7 @@ public class Metrics {
     private static Boolean w = false;
     private static Boolean c = false;
 
-    LinkedList files = new LinkedList<Files>();
+    private static LinkedList<Files> filesHolder = new LinkedList<Files>();
 
     public static void main(String[] args) {
         // check for help request
@@ -49,7 +58,9 @@ public class Metrics {
         Files test = new Files();
         test.name = "test";
         test.words = 50;
-        System.out.println(test.name + " " + test.words);
+        filesHolder.add(test);
+        Files test2 = filesHolder.pop();
+        System.out.println(test2.name + " " + test2.words);
 
     }
 
@@ -93,17 +104,18 @@ public class Metrics {
                 String line = reader.readLine();
                 if (line != null) {
                     lines++;
+                    chars += line.length();
 
                     // get words in line
                     String trim = line.trim();
                     if (!trim.isEmpty())
                         words += trim.split("\\s+").length;
-
-                    chars += line.length();
                 } else {
                     break;
                 }
             }
+
+            Files temp = new Files();
 
             totalLines += lines;
             totalWords += words;
