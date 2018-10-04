@@ -15,7 +15,7 @@ public class Metrics {
 
     public static void main(String[] args) {
         // check for help request
-        Boolean h = false;
+        //Boolean h = false;
         for (int i = 0; i < args.length; i++) {
             if (args[i].charAt(0) == '-' && args[i].contains("h")) {
                 h = true;
