@@ -4,17 +4,6 @@
  */
 import java.io.*;
 
-class filesHolder {
-    String names[];
-    int lines[];
-    int words[];
-    int chars[];
-
-    public filesHolder() {
-
-    }
-}
-
 public class Metrics {
     private static String[] argsHolder;
     private static long totalLines = 0;
