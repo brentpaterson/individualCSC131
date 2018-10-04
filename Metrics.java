@@ -4,6 +4,17 @@
  */
 import java.io.*;
 
+class filesHolder {
+    String names[];
+    int lines[];
+    int words[];
+    int chars[];
+
+    public filesHolder() {
+
+    }
+}
+
 public class Metrics {
     private static String[] argsHolder;
     private static long totalLines = 0;
@@ -29,12 +40,19 @@ public class Metrics {
                 "wc -w <filename> will print the word count\n" +
                 "wc -s <filename> will print the source lines count\n" +
                 "wc -C <filename> will print the comment lines count\n" +
+                "wc -h <filename> will print this message\n" +
                 "wc <filename> will print all of the above");
     }
 
     private static void analyzeFile() {
         Boolean fileExists = false;
         for (int i = 0; i < argsHolder.length; i++) {
+            // asking for help?
+            if (argsHolder[i].contains("h") && argsHolder[i].charAt(0) == '-') {
+                // break for, print instructions and end program
+                fileExists = false;
+                break;
+            }
             // is a file?
             if (argsHolder[i].charAt(0) != '-') {
                 fileExists = true;
