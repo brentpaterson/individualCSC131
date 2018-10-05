@@ -143,7 +143,7 @@ public class Metrics {
             }
         }
 
-        // no params, all true 
+        // no params, all true
         if (!l && !w && !c && !s && !C) {
             l = w = c = s = C = true;
         }
