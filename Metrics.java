@@ -57,16 +57,6 @@ public class Metrics {
             // no args or help requested
             instructions();
         }
-
-
-        //TESTING//////////////////////////////
-        Files test = new Files();
-        test.name = "test";
-        test.words = 50;
-        filesHolder.add(test);
-        Files test2 = filesHolder.pop();
-        System.out.println(test2.name + " " + test2.words);
-
     }
 
     private static void instructions() {
@@ -172,39 +162,45 @@ public class Metrics {
 
         int maxDigits = String.valueOf(max).length();
 
+        // output each file
         while (!filesHolder.isEmpty()) {
             Files temp = filesHolder.pop();
-            String tempName = temp.name;
-            long lines = temp.lines;
-            long words = temp.words;
-            long chars = temp.chars;
-            long sources = temp.sources;
-            long comments = temp.comments;
 
-            
+            boolean prgmFile = programFileChecker(temp.name);
+
+            outputter(maxDigits, temp.lines, temp.words, temp.chars, temp.sources, temp.comments, prgmFile);
+            System.out.print(temp.name + "\n");
 
         }
 
+        // output total
+        outputter(maxDigits, totalLines, totalWords, totalChars, totalSources, totalComments, programmingFile);
+        System.out.print("total\n");
 
-        if (l)
-            System.out.print(lines + " ");
-        if (w)
-            System.out.print(words + " ");
-        if (c)
-            System.out.print(chars + " ");
-
-        System.out.print(file + "\n");
     }
 
-    private static void outputTotal() {
-        if (l)
-            System.out.print(totalLines + " ");
-        if (w)
-            System.out.print(totalWords + " ");
-        if (c)
-            System.out.print(totalChars + " ");
-
-        System.out.print("total\n");
+    private static void outputter(int maxDigits, long lines, long words, long chars,
+                                  long sources, long comments, boolean prgmFile) {
+        if (l) {
+            spacePrinter(maxDigits, lines);
+            System.out.print(lines + " ");
+        }
+        if (w) {
+            spacePrinter(maxDigits, words);
+            System.out.print(words + " ");
+        }
+        if (c) {
+            spacePrinter(maxDigits, chars);
+            System.out.print(chars + " ");
+        }
+        if (s && prgmFile) {
+            spacePrinter(maxDigits, sources);
+            System.out.print(sources + " ");
+        }
+        if (C && prgmFile) {
+            spacePrinter(maxDigits, comments);
+            System.out.print(comments + " ");
+        }
     }
 
     private static boolean programFileChecker(String name) {
@@ -217,5 +213,10 @@ public class Metrics {
             return true;
         }
         return false;
+    }
+
+    private static void spacePrinter(int maxDigits, long num) {
+        for (int i = maxDigits - String.valueOf(num).length(); i < maxDigits; i++)
+            System.out.print(" ");
     }
 }
