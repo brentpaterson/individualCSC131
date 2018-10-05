@@ -216,7 +216,7 @@ public class Metrics {
     }
 
     private static void spacePrinter(int maxDigits, long num) {
-        for (int i = maxDigits - String.valueOf(num).length(); i < maxDigits; i++)
+        for (int i = Math.min(String.valueOf(num).length(), maxDigits); i < maxDigits; i++)
             System.out.print(" ");
     }
 }
