@@ -110,7 +110,6 @@ public class Metrics {
                         // check if and how many source line
                         if (!commentLine && !trim.startsWith("//") && !trim.startsWith("/*")) {
                             sources++;
-
                         }
 
                         // check if comment line
