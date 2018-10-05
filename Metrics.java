@@ -110,7 +110,7 @@ public class Metrics {
                         // check if and how many source line
                         if (!commentLine && !trim.startsWith("//") && !trim.startsWith("/*")) {
                             sources++;
-                            
+
                         }
 
                         // check if comment line
@@ -138,10 +138,12 @@ public class Metrics {
             totalLines += lines;
             totalWords += words;
             totalChars += chars;
-            totalSources += sources;
-            totalComments += comments;
+            if (programFileChecker(file)) {
+                totalSources += sources;
+                totalComments += comments;
+            }
 
-            Files temp = new Files(file, lines, words, chars, 0, 0);
+            Files temp = new Files(file, lines, words, chars, sources, comments);
             filesHolder.add(temp);
         } catch (Exception e) {
             instructions();
