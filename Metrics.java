@@ -172,7 +172,7 @@ public class Metrics {
 
             // leave blank space for other prgmFile
             if (programmingFile && !prgmFile)
-                for (int i = 0; i < 2 * maxDigits; i++)
+                for (int i = 0; i < 2 * maxDigits + 2; i++)
                     System.out.print(" ");
 
             System.out.print(temp.name + "\n");
