@@ -162,6 +162,8 @@ public class Metrics {
 
         int maxDigits = String.valueOf(max).length();
 
+        headerOutput(maxDigits);
+
         // output each file
         while (!filesHolder.isEmpty()) {
             Files temp = filesHolder.pop();
@@ -224,5 +226,51 @@ public class Metrics {
     private static void spacePrinter(int maxDigits, long num) {
         for (int i = Math.min(String.valueOf(num).length(), maxDigits); i < maxDigits; i++)
             System.out.print(" ");
+    }
+
+    private static void headerOutput(int maxDigits) {
+        boolean ranOnce = false;
+        if (l) {
+            for (int i = 0; i < maxDigits - 1; i++)
+                System.out.print(" ");
+            System.out.print("l");
+            ranOnce = true;
+        }
+
+        if (w) {
+            for (int i = 0; i < maxDigits - 1; i++)
+                System.out.print(" ");
+            if (ranOnce)
+                System.out.print(" ");
+            System.out.print("w");
+            ranOnce = true;
+        }
+
+        if (c) {
+            for (int i = 0; i < maxDigits - 1; i++)
+                System.out.print(" ");
+            if (ranOnce)
+                System.out.print(" ");
+            System.out.print("c");
+            ranOnce = true;
+        }
+
+        if (s) {
+            for (int i = 0; i < maxDigits - 1; i++)
+                System.out.print(" ");
+            if (ranOnce)
+                System.out.print(" ");
+            System.out.print("s");
+            ranOnce = true;
+        }
+
+        if (C) {
+            for (int i = 0; i < maxDigits - 1; i++)
+                System.out.print(" ");
+            if (ranOnce)
+                System.out.print(" ");
+            System.out.print("C");
+        }
+        System.out.print("\n");
     }
 }
