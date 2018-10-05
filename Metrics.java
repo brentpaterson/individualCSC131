@@ -170,8 +170,8 @@ public class Metrics {
 
             outputter(maxDigits, temp.lines, temp.words, temp.chars, temp.sources, temp.comments, prgmFile);
 
-            // leave blank space for prgmFile
-            if (programmingFile)
+            // leave blank space for other prgmFile
+            if (programmingFile && !prgmFile)
                 for (int i = 0; i < 2 * maxDigits; i++)
                     System.out.print(" ");
 
