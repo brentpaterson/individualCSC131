@@ -95,6 +95,7 @@ public class Metrics {
             BufferedReader reader = new BufferedReader(new FileReader(new File(file)));
             long lines, words, chars, sources, comments;
             lines = words = chars = sources = comments = 0;
+            boolean commentLine = false;
 
             while (true) {
                 String line = reader.readLine();
@@ -104,8 +105,31 @@ public class Metrics {
 
                     // get words in line
                     String trim = line.trim();
-                    if (!trim.isEmpty())
+
+                    if (!trim.isEmpty()) {
+                        // check if and how many source line
+                        if (!commentLine && !trim.startsWith("//") && !trim.startsWith("/*")) {
+                            sources++;
+                            
+                        }
+
+                        // check if comment line
+                        if (commentLine)
+                            comments++;
+                        if (trim.contains("//") && !commentLine)
+                            comments++;
+                        else if (trim.contains("/*") && !commentLine) {
+                            comments++;
+                            commentLine = true;
+                            if (trim.contains("*/"))
+                                commentLine = false;
+                        } else if (trim.contains("*/"))
+                            commentLine = false;
+
+
+
                         words += trim.split("\\s+").length;
+                    }
                 } else {
                     break;
                 }
