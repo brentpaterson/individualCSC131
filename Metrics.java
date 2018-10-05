@@ -169,6 +169,12 @@ public class Metrics {
             boolean prgmFile = programFileChecker(temp.name);
 
             outputter(maxDigits, temp.lines, temp.words, temp.chars, temp.sources, temp.comments, prgmFile);
+
+            // leave blank space for prgmFile
+            if (programmingFile)
+                for (int i = 0; i < 2 * maxDigits; i++)
+                    System.out.print(" ");
+
             System.out.print(temp.name + "\n");
 
         }
