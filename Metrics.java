@@ -26,6 +26,34 @@ class Files {
     }
 }
 
+class Halstead {
+    protected long littleN1, littleN2, bigN1, bigN2;
+    protected long nVocabulary, nLength;
+    protected float nCalcLength, nVolume, nDifficulty, nEffort, nTime, nBugs;
+
+    public Halstead() {
+        littleN1 = littleN2 = bigN1 = bigN2 = nVocabulary = nLength = 0;
+        nCalcLength = nVolume = nDifficulty = nEffort = nTime = nBugs = 0;
+    }
+
+    public Halstead (long littleN1, long littleN2, long bigN1, long bigN2) {
+        this.littleN1 = littleN1;
+        this.littleN2 = littleN2;
+        this.bigN1 = bigN1;
+        this.bigN2 = bigN2;
+
+        //do the math to fill in the others
+    }
+
+    public float getVocab () {
+        return littleN1 + littleN2;
+    }
+
+    public float getLength () {
+        
+    }
+}
+
 public class Metrics {
     private static String[] argsHolder;
     private static long totalLines = 0;
