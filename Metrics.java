@@ -35,14 +35,16 @@ public class Metrics {
     private static long totalComments = 0;
     @CommandLine.Option(names = "-l", usageHelp = true, description = "Display number of lines")
     private static Boolean l = false;
-    @CommandLine.Option(names = "-w", usageHelp = true, description = "Display number of lines")
+    @CommandLine.Option(names = "-w", usageHelp = true, description = "Display number of words")
     private static Boolean w = false;
-    @CommandLine.Option(names = "-c", usageHelp = true, description = "Display number of lines")
+    @CommandLine.Option(names = "-c", usageHelp = true, description = "Display number of characters")
     private static Boolean c = false;
-    @CommandLine.Option(names = "-s", usageHelp = true, description = "Display number of lines")
+    @CommandLine.Option(names = "-s", usageHelp = true, description = "Display number of source lines")
     private static Boolean s = false;
-    @CommandLine.Option(names = "-C", usageHelp = true, description = "Display number of lines")
+    @CommandLine.Option(names = "-C", usageHelp = true, description = "Display number of comment lines")
     private static Boolean C = false;
+    @CommandLine.Option(names = "-H", usageHelp = true, description = "Display Halstead's metrics")
+    private static Boolean H = false;
     private static Boolean programmingFile = false;
 
     @CommandLine.Parameters(paramLabel = "FILES", description = "Files to parse")
