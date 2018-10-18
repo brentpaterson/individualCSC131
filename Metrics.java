@@ -177,12 +177,14 @@ public class Metrics {
                     s = true;
                 if (argsHolder[i].contains("C"))
                     C = true;
+                if (argsHolder[i].contains("H"));
+                    H = true;
             }
         }
 
         // no params, all true
-        if (!l && !w && !c && !s && !C) {
-            l = w = c = s = C = true;
+        if (!l && !w && !c && !s && !C && !H) {
+            l = w = c = s = C = H = true;
         }
 
         long max = 0;
@@ -196,6 +198,8 @@ public class Metrics {
             max = Math.max(totalSources, max);
         if (C)
             max = Math.max(totalComments, max);
+        if (H)
+            ; // to be added
 
         int maxDigits = String.valueOf(max).length();
 
