@@ -76,6 +76,7 @@ public class Metrics {
                 "wc -w <filename> will print the word count\n" +
                 "wc -s <filename> will print the source lines count\n" +
                 "wc -C <filename> will print the comment lines count\n" +
+                "wc -H <filename> will print Halstead's metrics\n" +
                 "wc -h <filename> will print this message\n" +
                 "wc <filename> will print all of the above");
     }
