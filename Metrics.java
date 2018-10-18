@@ -29,7 +29,7 @@ class Files {
 class Halstead {
     protected long littleN1, littleN2, bigN1, bigN2;
     protected long nVocabulary, nLength;
-    protected float nCalcLength, nVolume, nDifficulty, nEffort, nTime, nBugs;
+    protected double nCalcLength, nVolume, nDifficulty, nEffort, nTime, nBugs;
 
     public Halstead() {
         littleN1 = littleN2 = bigN1 = bigN2 = nVocabulary = nLength = 0;
@@ -45,11 +45,19 @@ class Halstead {
         //do the math to fill in the others
     }
 
-    public float getVocab () {
+    public long getNVocab () {
         return littleN1 + littleN2;
     }
 
-    public float getLength () {
+    public long getNLength () {
+        return bigN1 + bigN2;
+    }
+
+    public double getNCalcLength () {
+        return (littleN1 * (Math.log((double) littleN1) / Math.log(2)) + littleN2 * (Math.log((double) littleN2) / Math.log(2)));
+    }
+
+    public double getNVolume () {
         
     }
 }
