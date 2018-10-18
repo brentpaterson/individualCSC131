@@ -54,12 +54,19 @@ class Halstead {
     }
 
     public double getNCalcLength () {
-        return (littleN1 * (Math.log((double) littleN1) / Math.log(2)) + littleN2 * (Math.log((double) littleN2) / Math.log(2)));
+        return (littleN1 * (Math.log(littleN1) / Math.log(2)) + littleN2 * (Math.log(littleN2) / Math.log(2)));
     }
 
     public double getNVolume () {
-        
+        if (nLength == 0)
+            nLength = getNLength();
+        if (nVocabulary == 0)
+            nVocabulary = getNVocab();
+
+        return nLength * (Math.log(nVocabulary) / Math.log(2));
     }
+
+    
 }
 
 public class Metrics {
