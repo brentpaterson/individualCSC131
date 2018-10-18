@@ -2,6 +2,8 @@
  * CSC131
  * Individual sprint 2, Metrics.java
  */
+import picocli.CommandLine;
+
 import java.io.*;
 import java.util.*;
 
@@ -31,13 +33,19 @@ public class Metrics {
     private static long totalChars = 0;
     private static long totalSources = 0;
     private static long totalComments = 0;
+    @CommandLine.Option(names = "-l", usageHelp = true, description = "Display number of lines")
     private static Boolean l = false;
+    @CommandLine.Option(names = "-w", usageHelp = true, description = "Display number of lines")
     private static Boolean w = false;
+    @CommandLine.Option(names = "-c", usageHelp = true, description = "Display number of lines")
     private static Boolean c = false;
+    @CommandLine.Option(names = "-s", usageHelp = true, description = "Display number of lines")
     private static Boolean s = false;
+    @CommandLine.Option(names = "-C", usageHelp = true, description = "Display number of lines")
     private static Boolean C = false;
     private static Boolean programmingFile = false;
 
+    @CommandLine.Parameters(paramLabel = "FILES", description = "Files to parse")
     private static LinkedList<Files> filesHolder = new LinkedList<Files>();
 
     public static void main(String[] args) {
@@ -145,8 +153,9 @@ public class Metrics {
             Files temp = new Files(file, lines, words, chars, sources, comments);
             filesHolder.add(temp);
         } catch (Exception e) {
+            System.out.println("\nError: " + e + "\n");
             instructions();
-            System.out.println("Error: " + e);
+            System.exit(-1);
         }
     }
 
