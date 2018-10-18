@@ -206,10 +206,15 @@ public class Metrics {
 
             outputter(maxDigits, temp.lines, temp.words, temp.chars, temp.sources, temp.comments, prgmFile);
 
+            int prgmFileCounts = 0;
+            if (s) prgmFileCounts++;
+            if (C) prgmFileCounts++;
+
             // leave blank space for other prgmFile
             if (programmingFile && !prgmFile)
-                for (int i = 0; i < 2 * maxDigits + 2; i++)
-                    System.out.print(" ");
+                for (int i = 0; i < prgmFileCounts; i++)
+                    for (int j = 0; j < maxDigits + 1; j++)
+                        System.out.print(" ");
 
             System.out.print(temp.name + "\n");
 
@@ -263,6 +268,7 @@ public class Metrics {
     }
 
     private static void headerOutput(int maxDigits) {
+
         boolean ranOnce = false;
         if (l) {
             for (int i = 0; i < maxDigits - 1; i++)
