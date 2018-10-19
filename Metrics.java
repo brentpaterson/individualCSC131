@@ -42,7 +42,10 @@ class Halstead {
         this.bigN1 = bigN1;
         this.bigN2 = bigN2;
 
-        //do the math to fill in the others
+        // only fncs need to be ran as they call each other
+        nCalcLength = getNCalcLength();
+        nTime = getNTime();
+        nBugs = getNBugs();
     }
 
     public long getNVocab () {
@@ -77,6 +80,20 @@ class Halstead {
             nVolume = getNVolume();
 
         return nDifficulty * nVolume;
+    }
+
+    public double getNTime() {
+        if (nEffort == 0)
+            nEffort = getNEffort();
+
+        return nEffort / 18;
+    }
+
+    public double getNBugs() {
+        if (nVolume == 0)
+            nVolume = getNVolume();
+
+        return nVolume / 3000;
     }
 }
 
