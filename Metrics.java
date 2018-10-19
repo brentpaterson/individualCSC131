@@ -43,6 +43,7 @@ class Halstead {
         this.bigN2 = bigN2;
 
         // only fncs need to be ran as they call each other
+        /* confirm everything will default to 0 if not specified? */
         nCalcLength = getNCalcLength();
         nTime = getNTime();
         nBugs = getNBugs();
