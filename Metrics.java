@@ -66,7 +66,18 @@ class Halstead {
         return nLength * (Math.log(nVocabulary) / Math.log(2));
     }
 
-    
+    public double getNDifficulty() {
+        return ((double) littleN1 / 2) + ((double)bigN2 / (double) littleN2);
+    }
+
+    public double getNEffort() {
+        if (nDifficulty == 0)
+            nDifficulty = getNDifficulty();
+        if (nVolume == 0)
+            nVolume = getNVolume();
+
+        return nDifficulty * nVolume;
+    }
 }
 
 public class Metrics {
