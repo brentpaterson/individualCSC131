@@ -98,7 +98,32 @@ public class MetricsApp implements IMetrics {
 
         return sourceLines;
     }
-    int getCommentLineCount();
+    int getCommentLineCount(String file) {
+        BufferedReader reader = new BufferedReader(new FileReader(new File(file)));
+        int commentLines = 0;
+        boolean comments = false;
+
+        while (true) {
+            String line = reader.readLine();
+            if (line == null)
+                break;
+            else {
+                line = line.trim();
+                if (comments)
+                    commentLines++;
+                if (line.contains("//"))
+                    commentLines++;
+                if (line.contains("/*")) {
+                    commentLines++;
+                    comments = true;
+                    if (line.contains("*/"))
+                        comments = false;
+                }
+            }
+        }
+
+        return commentLines;
+    }
 
     // Halstead metrics
     //
