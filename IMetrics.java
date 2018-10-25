@@ -1,4 +1,4 @@
-package com.company;
+
 interface IMetrics {
 
     boolean setPath(String path);   // sets the file path to process

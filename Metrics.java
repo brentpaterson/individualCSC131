@@ -2,7 +2,7 @@
  * CSC131
  * Individual sprint 2, Metrics.java
  */
-import com.company.MetricsApp;
+
 import picocli.CommandLine;
 
 import java.util.*;
@@ -56,16 +56,21 @@ public class Metrics {
         argsHolder = args;
         if (args.length > 0 && !h) {
             getOptions();
-            run();
+            try {
+                run();
+            } catch (Exception e) {
+                System.out.println("Error: " + e);
+                instructions();
+            }
         } else {
             // no args or help requested
             instructions();
         }
     }
 
-    private static void run() {
+    private static void run() throws Exception {
         //LinkedList<Files> initFiles = new LinkedList<>();
-        MetricsApp metricsGetter = new MetricsApp();
+        MetricsApp metricsGetter;
         for (int i = 0; i < argsHolder.length; i++) {
             //Files f = new File();
             if (!argsHolder[i].startsWith("-")) {
@@ -74,37 +79,36 @@ public class Metrics {
                 //initFiles.push(f);
 
                 if (l) {
-                    f.lines = metricsGetter.getLineCount(f.name);
+                    f.lines = MetricsApp.getLineCount(f.name);
                     totalLines += f.lines;
                 }
                 if (w) {
-                    f.words = metricsGetter.getWordCount(f.name);
+                    f.words = MetricsApp.getWordCount(f.name);
                     totalWords += f.words;
                 }
                 if (c) {
-                    f.chars = metricsGetter.getCharacterCount(f.name);
+                    f.chars = MetricsApp.getCharacterCount(f.name);
                     totalChars += f.chars;
                 }
                 if (s) {
-                    f.sources = metricsGetter.getSourceLineCount(f.name);
+                    f.sources = MetricsApp.getSourceLineCount(f.name);
                     totalSources += f.sources;
                 }
                 if (C) {
-                    f.comments = metricsGetter.getCommentLineCount(f.name);
+                    f.comments = MetricsApp.getCommentLineCount(f.name);
                     totalComments += f.comments;
                 }
                 if (H);
                 if (s || C) {
-                    f.isSource = metricsGetter.isSource(f.name);
+                    f.isSource = MetricsApp.isSource(f.name);
                     sourceFile = true;
                 }
 
                 filesHolder.push(f);
             }
-
-
-
         }
+
+        output();
 
     }
 
@@ -181,7 +185,7 @@ public class Metrics {
         }
 
         // output total
-        outputter(maxDigits, totalLines, totalWords, totalChars, totalSources, totalComments, programmingFile);
+        outputter(maxDigits, totalLines, totalWords, totalChars, totalSources, totalComments, sourceFile);
         System.out.print("total\n");
 
     }

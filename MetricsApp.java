@@ -1,16 +1,17 @@
-package com.company;
+
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 
-public class MetricsApp implements IMetrics {
+public abstract class MetricsApp implements IMetrics {
 
-    boolean setPath(String path);   // sets the file path to process
+
+    //boolean setPath(String path);   // sets the file path to process
     // returns true if current path is valid
 
     // returns true if the file is a source file
-    public boolean isSource(String file) {
+    public static boolean isSource(String file) {
         if (file.contains(".java")
                 || file.contains(".cpp")
                 || file.contains(".c")
@@ -24,7 +25,8 @@ public class MetricsApp implements IMetrics {
 
     // basic counts for any file
     //
-    public int getLineCount(String file) {
+    public static int getLineCount(String file) throws Exception {
+
         BufferedReader reader = new BufferedReader(new FileReader(new File(file)));
         int lines = 0;
 
@@ -37,9 +39,11 @@ public class MetricsApp implements IMetrics {
         }
 
         return lines;
+
     }
 
-    public int getWordCount(String file) {
+    public static int getWordCount(String file) throws Exception {
+
         BufferedReader reader = new BufferedReader(new FileReader(new File(file)));
         int words = 0;
 
@@ -55,8 +59,10 @@ public class MetricsApp implements IMetrics {
         }
 
         return words;
+
     }
-    public int getCharacterCount(String file) {
+    public static int getCharacterCount(String file) throws Exception {
+
         BufferedReader reader = new BufferedReader(new FileReader(new File(file)));
         int chars = 0;
 
@@ -69,11 +75,13 @@ public class MetricsApp implements IMetrics {
         }
 
         return chars;
+
     }
 
     // source code line counts
     //
-    public int getSourceLineCount(String file) {
+    public static int getSourceLineCount(String file) throws Exception {
+
         BufferedReader reader = new BufferedReader(new FileReader(new File(file)));
         int sourceLines = 0;
         boolean comments = false;
@@ -109,8 +117,9 @@ public class MetricsApp implements IMetrics {
         }
 
         return sourceLines;
+
     }
-    public int getCommentLineCount(String file) {
+    public static int getCommentLineCount(String file) throws Exception {
         BufferedReader reader = new BufferedReader(new FileReader(new File(file)));
         int commentLines = 0;
         boolean comments = false;
@@ -135,24 +144,23 @@ public class MetricsApp implements IMetrics {
         }
 
         return commentLines;
+
     }
 
     // Halstead metrics
     //
 
     // number of distinct operands
-    int getHalsteadn1() {
-
-    }
+    //int getHalsteadn1();
 
     // number of distinct operators
-    int getHalsteadn2();
+    //int getHalsteadn2();
 
     // number of operands
-    int getHalsteadN1();
+    //int getHalsteadN1();
 
     // number of operators
-    int getHalsteadN2();
+    //int getHalsteadN2();
 
     int getHalsteadVocabulary(int n1, int n2) {
         return n1 + n2;
