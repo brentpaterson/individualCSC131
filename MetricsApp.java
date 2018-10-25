@@ -40,7 +40,17 @@ public class MetricsApp implements IMetrics {
 
         return words;
     }
-    int getCharacterCount();
+    int getCharacterCount(String file) {
+        BufferedReader reader = new BufferedReader(new FileReader(new File(file)));
+        int chars = 0;
+
+        while (true) {
+            String line = reader.readLine();
+            chars += line.length();
+        }
+
+        return chars;
+    }
 
     // source code line counts
     //
