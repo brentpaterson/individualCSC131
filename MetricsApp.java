@@ -127,17 +127,50 @@ public class MetricsApp implements IMetrics {
 
     // Halstead metrics
     //
-    int getHalsteadn1();            // number of distinct operands
-    int getHalsteadn2();            // number of distinct operators
-    int getHalsteadN1();            // number of operands
-    int getHalsteadN2();            // number of operators
 
-    int getHalsteadVocabulary();
-    int getHalsteadProgramLength();
-    int getHalsteadCalculatedProgramLenght();
-    int getHalsteadVolume();
-    int getHalsteadDifficulty();
-    int getHalsteadEffort();
-    int getHalsteadTime();
-    int getHalsteadBugs();
+    // number of distinct operands
+    int getHalsteadn1() {
+
+    }
+
+    // number of distinct operators
+    int getHalsteadn2();
+
+    // number of operands
+    int getHalsteadN1();
+
+    // number of operators
+    int getHalsteadN2();
+
+    int getHalsteadVocabulary(int n1, int n2) {
+        return n1 + n2;
+    }
+
+    int getHalsteadProgramLength(int N1, int N2) {
+        return N1 + N2;
+    }
+
+    int getHalsteadCalculatedProgramLenght(int n1, int n2) {
+        return (int) (n1 * (Math.log(n1) / Math.log(2)) + n2 * (Math.log(n2) / Math.log(2)));
+    }
+
+    int getHalsteadVolume(int nLength, int nVocabulary) {
+        return (int) (nLength * (Math.log(nVocabulary) / Math.log(2)));
+    }
+
+    int getHalsteadDifficulty(int n1, int n2, int N2) {
+        return (n1 / 2) + (N2 / n2);
+    }
+
+    int getHalsteadEffort(int nDifficulty, int nVolume) {
+        return nDifficulty * nVolume;
+    }
+
+    int getHalsteadTime(int nEffort) {
+        return nEffort / 18;
+    }
+
+    int getHalsteadBugs(int nVolume) {
+        return nVolume / 3000;
+    }
 }
