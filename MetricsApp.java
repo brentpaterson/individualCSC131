@@ -33,9 +33,13 @@ public class MetricsApp implements IMetrics {
 
         while (true) {
             String line = reader.readLine();
-            String trim = line.trim();
+            if (line == null)
+                break;
+            else {
+                String trim = line.trim();
 
-            words += trim.split("\\s+").length;
+                words += trim.split("\\s+").length;
+            }
         }
 
         return words;
@@ -46,7 +50,10 @@ public class MetricsApp implements IMetrics {
 
         while (true) {
             String line = reader.readLine();
-            chars += line.length();
+            if (line == null)
+                break;
+            else
+                chars += line.length();
         }
 
         return chars;
@@ -54,7 +61,43 @@ public class MetricsApp implements IMetrics {
 
     // source code line counts
     //
-    int getSourceLineCount();
+    int getSourceLineCount(String file) {
+        BufferedReader reader = new BufferedReader(new FileReader(new File(file)));
+        int sourceLines = 0;
+        boolean comments = false;
+
+        while (true) {
+            String line = reader.readLine();
+            if (line == null)
+                break;
+            else {
+                line = line.trim();
+                if (line.startsWith("//")) // full line comment
+                    continue;
+                if (line.startsWith("/*") && !line.endsWith("*/") && line.contains("*/")) {
+                    //starts and ends comment but continues
+                    sourceLines++;
+                }
+                if (line.startsWith("/*") && !line.contains("*/")) {
+                    // begins multi line comment but does not end it
+                    comments = true;
+                    continue;
+                }
+                if (!line.startsWith("/*") && !comments) {
+                    sourceLines++;
+                    if (line.contains("/*") && !line.contains("*/"))
+                        comments = true;
+                }
+                if (line.contains("*/")) {
+                    comments = false;
+                    if (!line.endsWith("*/"))
+                        sourceLines++;
+                }
+            }
+        }
+
+        return sourceLines;
+    }
     int getCommentLineCount();
 
     // Halstead metrics
