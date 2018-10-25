@@ -33,8 +33,12 @@ public class MetricsApp implements IMetrics {
 
         while (true) {
             String line = reader.readLine();
+            String trim = line.trim();
 
+            words += trim.split("\\s+").length;
         }
+
+        return words;
     }
     int getCharacterCount();
 
