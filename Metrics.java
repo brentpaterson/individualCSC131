@@ -10,6 +10,7 @@ import java.util.*;
 class Files {
     public long lines, words, chars, sources, comments;
     public String name;
+    // test comment
 
     public Files() {
         lines = words = chars = sources = comments = 0;
@@ -26,6 +27,78 @@ class Files {
     }
 }
 
+class Halstead {
+    protected long littleN1, littleN2, bigN1, bigN2;
+    protected long nVocabulary, nLength;
+    protected double nCalcLength, nVolume, nDifficulty, nEffort, nTime, nBugs;
+
+    public Halstead() {
+        littleN1 = littleN2 = bigN1 = bigN2 = nVocabulary = nLength = 0;
+        nCalcLength = nVolume = nDifficulty = nEffort = nTime = nBugs = 0;
+    }
+
+    public Halstead (long littleN1, long littleN2, long bigN1, long bigN2) {
+        this.littleN1 = littleN1;
+        this.littleN2 = littleN2;
+        this.bigN1 = bigN1;
+        this.bigN2 = bigN2;
+
+        // only fncs need to be ran as they call each other
+        /* confirm everything will default to 0 if not specified? */
+        nCalcLength = getNCalcLength();
+        nTime = getNTime();
+        nBugs = getNBugs();
+    }
+
+    public long getNVocab () {
+        return littleN1 + littleN2;
+    }
+
+    public long getNLength () {
+        return bigN1 + bigN2;
+    }
+
+    public double getNCalcLength () {
+        return (littleN1 * (Math.log(littleN1) / Math.log(2)) + littleN2 * (Math.log(littleN2) / Math.log(2)));
+    }
+
+    public double getNVolume () {
+        if (nLength == 0)
+            nLength = getNLength();
+        if (nVocabulary == 0)
+            nVocabulary = getNVocab();
+
+        return nLength * (Math.log(nVocabulary) / Math.log(2));
+    }
+
+    public double getNDifficulty() {
+        return ((double) littleN1 / 2) + ((double)bigN2 / (double) littleN2);
+    }
+
+    public double getNEffort() {
+        if (nDifficulty == 0)
+            nDifficulty = getNDifficulty();
+        if (nVolume == 0)
+            nVolume = getNVolume();
+
+        return nDifficulty * nVolume;
+    }
+
+    public double getNTime() {
+        if (nEffort == 0)
+            nEffort = getNEffort();
+
+        return nEffort / 18;
+    }
+
+    public double getNBugs() {
+        if (nVolume == 0)
+            nVolume = getNVolume();
+
+        return nVolume / 3000;
+    }
+}
+
 public class Metrics {
     private static String[] argsHolder;
     private static long totalLines = 0;
@@ -35,14 +108,16 @@ public class Metrics {
     private static long totalComments = 0;
     @CommandLine.Option(names = "-l", usageHelp = true, description = "Display number of lines")
     private static Boolean l = false;
-    @CommandLine.Option(names = "-w", usageHelp = true, description = "Display number of lines")
+    @CommandLine.Option(names = "-w", usageHelp = true, description = "Display number of words")
     private static Boolean w = false;
-    @CommandLine.Option(names = "-c", usageHelp = true, description = "Display number of lines")
+    @CommandLine.Option(names = "-c", usageHelp = true, description = "Display number of characters")
     private static Boolean c = false;
-    @CommandLine.Option(names = "-s", usageHelp = true, description = "Display number of lines")
+    @CommandLine.Option(names = "-s", usageHelp = true, description = "Display number of source lines")
     private static Boolean s = false;
-    @CommandLine.Option(names = "-C", usageHelp = true, description = "Display number of lines")
+    @CommandLine.Option(names = "-C", usageHelp = true, description = "Display number of comment lines")
     private static Boolean C = false;
+    @CommandLine.Option(names = "-H", usageHelp = true, description = "Display Halstead's metrics")
+    private static Boolean H = false;
     private static Boolean programmingFile = false;
 
     @CommandLine.Parameters(paramLabel = "FILES", description = "Files to parse")
@@ -74,6 +149,7 @@ public class Metrics {
                 "wc -w <filename> will print the word count\n" +
                 "wc -s <filename> will print the source lines count\n" +
                 "wc -C <filename> will print the comment lines count\n" +
+                "wc -H <filename> will print Halstead's metrics\n" +
                 "wc -h <filename> will print this message\n" +
                 "wc <filename> will print all of the above");
     }
@@ -174,12 +250,14 @@ public class Metrics {
                     s = true;
                 if (argsHolder[i].contains("C"))
                     C = true;
+                if (argsHolder[i].contains("H"));
+                H = true;
             }
         }
 
         // no params, all true
-        if (!l && !w && !c && !s && !C) {
-            l = w = c = s = C = true;
+        if (!l && !w && !c && !s && !C && !H) {
+            l = w = c = s = C = H = true;
         }
 
         long max = 0;
@@ -193,6 +271,8 @@ public class Metrics {
             max = Math.max(totalSources, max);
         if (C)
             max = Math.max(totalComments, max);
+        if (H)
+            ; // to be added
 
         int maxDigits = String.valueOf(max).length();
 

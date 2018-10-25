@@ -1,0 +1,149 @@
+commit cd21d575e37e267b467f2a3e59188b0eec0078c6
+Author: Brent Paterson <brentpaterson@csus.edu>
+Date:   Thu Oct 4 18:22:27 2018 -0700
+
+    updated source checking
+
+commit 26d5527aefa94ff56a933956d1461b66d70c6e6c
+Author: Brent Paterson <brentpaterson@csus.edu>
+Date:   Thu Oct 4 18:11:02 2018 -0700
+
+    fixed comment checking, added basic source checking
+
+commit 352b2f0e4984cfbeaee2f40ead049c868930c0f9
+Author: Brent Paterson <brentpaterson@csus.edu>
+Date:   Thu Oct 4 18:05:39 2018 -0700
+
+    added in comment checking
+
+commit 1d50afd917535182e68faeb4fac45dd58bb13ff4
+Author: Brent Paterson <brentpaterson@csus.edu>
+Date:   Thu Oct 4 17:42:36 2018 -0700
+
+    header FINALLY WORKING
+
+commit 9e88ed7b32b529e9db1be68533c8eeeacbfb23a1
+Author: Brent Paterson <brentpaterson@csus.edu>
+Date:   Thu Oct 4 17:25:14 2018 -0700
+
+    make output prettier work better part II
+
+commit 289b51ef995bc42d9abb920a37e49fe9c4bf181d
+Author: Brent Paterson <brentpaterson@csus.edu>
+Date:   Thu Oct 4 17:24:43 2018 -0700
+
+    make output prettier work better
+
+commit 53bb8d054c9fbb8b30a26e2e9ed404880fa457f6
+Author: Brent Paterson <brentpaterson@csus.edu>
+Date:   Thu Oct 4 17:23:26 2018 -0700
+
+    make output prettier
+
+commit aec2b902816b3deae3ac6672f7e57ff7f3398366
+Author: Brent Paterson <brentpaterson@csus.edu>
+Date:   Thu Oct 4 17:21:01 2018 -0700
+
+    fix for spacePrinter
+
+commit cd77d812835e8053a341a3c59e8c05d4c2bed502
+Author: Brent Paterson <brentpaterson@csus.edu>
+Date:   Thu Oct 4 17:16:19 2018 -0700
+
+    minor QOL
+
+commit 9ad2dd3616c482f2ffee23f2d1ace23b3f3d2754
+Author: Brent Paterson <brentpaterson@csus.edu>
+Date:   Thu Oct 4 17:14:54 2018 -0700
+
+    correction to last commit: fixed outputter
+
+commit f67e9936608741280aee03f47668b081feb13f3e
+Author: Brent Paterson <brentpaterson@csus.edu>
+Date:   Thu Oct 4 17:14:27 2018 -0700
+
+    implemented max fnc
+
+commit 991ba60f99bc85e1f362efa8380440e966fafac4
+Author: Brent Paterson <brentpaterson@csus.edu>
+Date:   Thu Oct 4 16:56:49 2018 -0700
+
+    implemented max fnc
+
+commit e3b91c2b48a32bc9ab1f4b05097049796f126430
+Author: Brent Paterson <brentpaterson@csus.edu>
+Date:   Thu Oct 4 16:33:54 2018 -0700
+
+    updated output to new list format
+
+commit 9d727522b09ccdc1736462942d5adc48c6d8538f
+Author: Brent Paterson <brentpaterson@csus.edu>
+Date:   Thu Oct 4 16:21:09 2018 -0700
+
+    list fully implemented and tested
+
+commit b508075530216a7fd8cbe1969f65fca414808848
+Author: Brent Paterson <brentpaterson@csus.edu>
+Date:   Thu Oct 4 16:10:21 2018 -0700
+
+    new way to store files and info
+
+commit fb6fec18b94d8e03ab002533761ea54c72bf0519
+Author: Brent Paterson <brentpaterson@csus.edu>
+Date:   Thu Oct 4 14:05:23 2018 -0700
+
+    testing branching
+
+commit 4d8081b7881b4936ed942cbcec50e787a3c40ab5
+Author: Brent Paterson <brentpaterson@csus.edu>
+Date:   Thu Oct 4 14:03:31 2018 -0700
+
+    saving for big rework
+
+commit d301f7b08636b40ed1e23ddf149331b22084d663
+Author: Brent Paterson <brentpaterson@csus.edu>
+Date:   Thu Oct 4 14:00:11 2018 -0700
+
+    made help smarter
+
+commit 95409b6236039d03ff70da9039ed65c8cf79b8be
+Author: Brent Paterson <brentpaterson@csus.edu>
+Date:   Thu Oct 4 13:54:39 2018 -0700
+
+    added help and fixed
+
+commit 5d540f87e4d52eb557d410a3a60ad2755db4b2a6
+Author: Brent Paterson <brentpaterson@csus.edu>
+Date:   Thu Oct 4 13:35:03 2018 -0700
+
+    changed print
+
+commit 5b7d97faeb7f6b2fb5b6e4bb0121a81b27e7e9fa
+Author: Brent Paterson <brentpaterson@csus.edu>
+Date:   Thu Oct 4 13:27:20 2018 -0700
+
+    metrics from wc
+
+commit eddc0ac8dd1490f0b5339081e9360f2747de51b6
+Author: Brent Paterson <brentpaterson@csus.edu>
+Date:   Thu Oct 4 13:26:04 2018 -0700
+
+    metrics made
+
+commit eb6c708dea1aa53e49ef731509510330faf96ec4
+Author: Brent Paterson <brentpaterson@csus.edu>
+Date:   Sun Sep 23 18:31:22 2018 -0700
+
+    added more comments
+
+commit da797729c30cf4cb77ef2359a7d36f7cf4074d91
+Author: Brent Paterson <brentpaterson@csus.edu>
+Date:   Sun Sep 23 18:27:13 2018 -0700
+
+    Added comments
+
+commit d3cd04f9d903c1ca582e38c411a91c82f0c761fc
+Author: Brent Paterson <brentpaterson@csus.edu>
+Date:   Sun Sep 23 18:25:21 2018 -0700
+
+    First commit

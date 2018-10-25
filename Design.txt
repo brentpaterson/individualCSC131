@@ -1,0 +1,15 @@
+check if help requested
+-yes? print instructions, end program
+
+look for file and commands in args
+-save file names to list (of custom object Files)
+-save commands
+
+go through files and get relevant counts
+-save counts
+
+print relevant counts
+
+
+source lines of code reference:
+https://www.semanticscholar.org/paper/A-SLOC-Counting-Standard-Nguyen-Deeds-Rubin/1110f97bdbd475ec4b3abdd59e5147583bd50332
