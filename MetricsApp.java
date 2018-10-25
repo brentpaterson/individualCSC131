@@ -8,7 +8,14 @@ public class MetricsApp implements IMetrics {
 
     boolean setPath(String path);   // sets the file path to process
     // returns true if current path is valid
-    boolean isSource();             // returns true if the file is a source file
+
+    // returns true if the file is a source file
+    boolean isSource(String file) {
+        if (file.contains(".java") || file.contains(".cpp") || file.contains(".c") || file.contains(".h"))
+            return true;
+        else
+            return false;
+    }
 
     // basic counts for any file
     //

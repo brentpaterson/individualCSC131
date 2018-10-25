@@ -27,78 +27,6 @@ class Files {
     }
 }
 
-class Halstead {
-    protected long littleN1, littleN2, bigN1, bigN2;
-    protected long nVocabulary, nLength;
-    protected double nCalcLength, nVolume, nDifficulty, nEffort, nTime, nBugs;
-
-    public Halstead() {
-        littleN1 = littleN2 = bigN1 = bigN2 = nVocabulary = nLength = 0;
-        nCalcLength = nVolume = nDifficulty = nEffort = nTime = nBugs = 0;
-    }
-
-    public Halstead (long littleN1, long littleN2, long bigN1, long bigN2) {
-        this.littleN1 = littleN1;
-        this.littleN2 = littleN2;
-        this.bigN1 = bigN1;
-        this.bigN2 = bigN2;
-
-        // only fncs need to be ran as they call each other
-        /* confirm everything will default to 0 if not specified? */
-        nCalcLength = getNCalcLength();
-        nTime = getNTime();
-        nBugs = getNBugs();
-    }
-
-    public long getNVocab () {
-        return littleN1 + littleN2;
-    }
-
-    public long getNLength () {
-        return bigN1 + bigN2;
-    }
-
-    public double getNCalcLength () {
-        return (littleN1 * (Math.log(littleN1) / Math.log(2)) + littleN2 * (Math.log(littleN2) / Math.log(2)));
-    }
-
-    public double getNVolume () {
-        if (nLength == 0)
-            nLength = getNLength();
-        if (nVocabulary == 0)
-            nVocabulary = getNVocab();
-
-        return nLength * (Math.log(nVocabulary) / Math.log(2));
-    }
-
-    public double getNDifficulty() {
-        return ((double) littleN1 / 2) + ((double)bigN2 / (double) littleN2);
-    }
-
-    public double getNEffort() {
-        if (nDifficulty == 0)
-            nDifficulty = getNDifficulty();
-        if (nVolume == 0)
-            nVolume = getNVolume();
-
-        return nDifficulty * nVolume;
-    }
-
-    public double getNTime() {
-        if (nEffort == 0)
-            nEffort = getNEffort();
-
-        return nEffort / 18;
-    }
-
-    public double getNBugs() {
-        if (nVolume == 0)
-            nVolume = getNVolume();
-
-        return nVolume / 3000;
-    }
-}
-
 public class Metrics {
     private static String[] argsHolder;
     private static long totalLines = 0;
@@ -118,7 +46,7 @@ public class Metrics {
     private static Boolean C = false;
     @CommandLine.Option(names = "-H", usageHelp = true, description = "Display Halstead's metrics")
     private static Boolean H = false;
-    private static Boolean programmingFile = false;
+    private static Boolean sourceFile = false;
 
     @CommandLine.Parameters(paramLabel = "FILES", description = "Files to parse")
     private static LinkedList<Files> filesHolder = new LinkedList<Files>();
