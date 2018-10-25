@@ -2,9 +2,9 @@
  * CSC131
  * Individual sprint 2, Metrics.java
  */
+import com.company.MetricsApp;
 import picocli.CommandLine;
 
-import java.io.*;
 import java.util.*;
 
 class Files {
@@ -63,11 +63,70 @@ public class Metrics {
 
         argsHolder = args;
         if (args.length > 0 && !h) {
-            analyzeFile();
+            getOptions();
+            run();
         } else {
             // no args or help requested
             instructions();
         }
+    }
+
+    private static void run() {
+        //LinkedList<Files> initFiles = new LinkedList<>();
+        MetricsApp metricsGetter = new MetricsApp();
+        for (int i = 0; i < argsHolder.length; i++) {
+            //Files f = new File();
+            if (!argsHolder[i].startsWith("-")) {
+                Files f = new Files();
+                f.name = argsHolder[i];
+                //initFiles.push(f);
+
+                if (l) {
+                    f.lines = metricsGetter.getLineCount(f.name);
+                    totalLines += f.lines;
+                }
+                if (w) {
+                    f.words = metricsGetter.getWordCount(f.name);
+                    totalWords += f.words;
+                }
+                if (c) {
+                    f.chars = metricsGetter.getCharacterCount(f.name);
+                    totalChars += f.chars;
+                }
+                if (s) {
+                    f.sources = metricsGetter.getSourceLineCount(f.name);
+                    totalSources += f.sources;
+                }
+                if (C) {
+                    f.comments = metricsGetter.getCommentLineCount(f.name);
+                    totalComments += f.comments;
+                }
+                if (H);
+
+                filesHolder.push(f);
+            }
+
+
+
+        }
+
+    }
+
+    private static void getOptions() {
+        for (int i = 0; i < argsHolder.length; i++) {
+            if (argsHolder[i].startsWith("-")) {
+                if (argsHolder[i].contains("l")) l = true;
+                if (argsHolder[i].contains("w")) w = true;
+                if (argsHolder[i].contains("c")) c = true;
+                if (argsHolder[i].contains("s")) s = true;
+                if (argsHolder[i].contains("C")) C = true;
+                if (argsHolder[i].contains("H")) H = true;
+            }
+        }
+
+        // no params, all true
+        if (!l && !w && !c && !s && !C && !H)
+            l = w = c = s = C = H = true;
     }
 
     private static void instructions() {
@@ -85,29 +144,6 @@ public class Metrics {
 
 
     private static void output() {
-
-        // find what params were given for output
-        for (int i = 0; i < argsHolder.length; i++) {
-            if (argsHolder[i].charAt(0) == '-') {
-                if (argsHolder[i].contains("l"))
-                    l = true;
-                if (argsHolder[i].contains("w"))
-                    w = true;
-                if (argsHolder[i].contains("c"))
-                    c = true;
-                if (argsHolder[i].contains("s"))
-                    s = true;
-                if (argsHolder[i].contains("C"))
-                    C = true;
-                if (argsHolder[i].contains("H"))
-                    H = true;
-            }
-        }
-
-        // no params, all true
-        if (!l && !w && !c && !s && !C && !H) {
-            l = w = c = s = C = H = true;
-        }
 
         long max = 0;
         if (l)

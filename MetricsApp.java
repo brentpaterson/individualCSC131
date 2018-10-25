@@ -24,7 +24,7 @@ public class MetricsApp implements IMetrics {
 
     // basic counts for any file
     //
-    int getLineCount(String file) {
+    public int getLineCount(String file) {
         BufferedReader reader = new BufferedReader(new FileReader(new File(file)));
         int lines = 0;
 
@@ -39,7 +39,7 @@ public class MetricsApp implements IMetrics {
         return lines;
     }
 
-    int getWordCount(String file) {
+    public int getWordCount(String file) {
         BufferedReader reader = new BufferedReader(new FileReader(new File(file)));
         int words = 0;
 
@@ -56,7 +56,7 @@ public class MetricsApp implements IMetrics {
 
         return words;
     }
-    int getCharacterCount(String file) {
+    public int getCharacterCount(String file) {
         BufferedReader reader = new BufferedReader(new FileReader(new File(file)));
         int chars = 0;
 
@@ -73,7 +73,7 @@ public class MetricsApp implements IMetrics {
 
     // source code line counts
     //
-    int getSourceLineCount(String file) {
+    public int getSourceLineCount(String file) {
         BufferedReader reader = new BufferedReader(new FileReader(new File(file)));
         int sourceLines = 0;
         boolean comments = false;
@@ -110,7 +110,7 @@ public class MetricsApp implements IMetrics {
 
         return sourceLines;
     }
-    int getCommentLineCount(String file) {
+    public int getCommentLineCount(String file) {
         BufferedReader reader = new BufferedReader(new FileReader(new File(file)));
         int commentLines = 0;
         boolean comments = false;
