@@ -250,8 +250,8 @@ public class Metrics {
                     s = true;
                 if (argsHolder[i].contains("C"))
                     C = true;
-                if (argsHolder[i].contains("H"));
-                H = true;
+                if (argsHolder[i].contains("H"))
+                    H = true;
             }
         }
 
