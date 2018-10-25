@@ -11,7 +11,12 @@ public class MetricsApp implements IMetrics {
 
     // returns true if the file is a source file
     boolean isSource(String file) {
-        if (file.contains(".java") || file.contains(".cpp") || file.contains(".c") || file.contains(".h"))
+        if (file.contains(".java")
+                || file.contains(".cpp")
+                || file.contains(".c")
+                || file.contains(".h")
+                || file.contains(".hpp")
+                || file.contains(".class"))
             return true;
         else
             return false;

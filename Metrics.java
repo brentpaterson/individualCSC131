@@ -82,86 +82,7 @@ public class Metrics {
                 "wc <filename> will print all of the above");
     }
 
-    private static void analyzeFile() {
-        Boolean fileExists = false;
-        for (int i = 0; i < argsHolder.length; i++) {
-            // is a file?
-            if (argsHolder[i].charAt(0) != '-') {
-                fileExists = true;
-                runFile(argsHolder[i]);
-                if (programFileChecker(argsHolder[i]))
-                    programmingFile = true;
-            }
-        }
 
-        // output total if there was a file, otherwise instructions
-        if (fileExists) {
-            output();
-        } else {
-            instructions();
-        }
-    }
-
-    private static void runFile(String file) {
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader(new File(file)));
-            long lines, words, chars, sources, comments;
-            lines = words = chars = sources = comments = 0;
-            boolean commentLine = false;
-
-            while (true) {
-                String line = reader.readLine();
-                if (line != null) {
-                    lines++;
-                    chars += line.length();
-
-                    // get words in line
-                    String trim = line.trim();
-
-                    if (!trim.isEmpty()) {
-                        // check if and how many source line
-                        if (!commentLine && !trim.startsWith("//") && !trim.startsWith("/*")) {
-                            sources++;
-                        }
-
-                        // check if comment line
-                        if (commentLine)
-                            comments++;
-                        if (trim.contains("//") && !commentLine)
-                            comments++;
-                        else if (trim.contains("/*") && !commentLine) {
-                            comments++;
-                            commentLine = true;
-                            if (trim.contains("*/"))
-                                commentLine = false;
-                        } else if (trim.contains("*/"))
-                            commentLine = false;
-
-
-
-                        words += trim.split("\\s+").length;
-                    }
-                } else {
-                    break;
-                }
-            }
-
-            totalLines += lines;
-            totalWords += words;
-            totalChars += chars;
-            if (programFileChecker(file)) {
-                totalSources += sources;
-                totalComments += comments;
-            }
-
-            Files temp = new Files(file, lines, words, chars, sources, comments);
-            filesHolder.add(temp);
-        } catch (Exception e) {
-            System.out.println("\nError: " + e + "\n");
-            instructions();
-            System.exit(-1);
-        }
-    }
 
     private static void output() {
 
@@ -256,18 +177,6 @@ public class Metrics {
             spacePrinter(maxDigits, comments);
             System.out.print(comments + " ");
         }
-    }
-
-    private static boolean programFileChecker(String name) {
-        if (name.endsWith(".java")
-                || name.endsWith(".cpp")
-                || name.endsWith(".c")
-                || name.endsWith(".class")
-                || name.endsWith(".hpp")
-                || name.endsWith(".h")) {
-            return true;
-        }
-        return false;
     }
 
     private static void spacePrinter(int maxDigits, long num) {
