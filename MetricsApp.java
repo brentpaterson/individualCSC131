@@ -10,7 +10,7 @@ public class MetricsApp implements IMetrics {
     // returns true if current path is valid
 
     // returns true if the file is a source file
-    boolean isSource(String file) {
+    public boolean isSource(String file) {
         if (file.contains(".java")
                 || file.contains(".cpp")
                 || file.contains(".c")

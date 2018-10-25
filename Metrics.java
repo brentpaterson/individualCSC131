@@ -10,20 +10,12 @@ import java.util.*;
 class Files {
     public long lines, words, chars, sources, comments;
     public String name;
-    // test comment
+    public boolean isSource;
 
     public Files() {
         lines = words = chars = sources = comments = 0;
         name = null;
-    }
-
-    public Files(String n, long l, long w, long c, long s, long com) {
-        name = n;
-        lines = l;
-        words = w;
-        chars = c;
-        sources = s;
-        comments = com;
+        isSource = false;
     }
 }
 
@@ -102,6 +94,10 @@ public class Metrics {
                     totalComments += f.comments;
                 }
                 if (H);
+                if (s || C) {
+                    f.isSource = metricsGetter.isSource(f.name);
+                    sourceFile = true;
+                }
 
                 filesHolder.push(f);
             }
@@ -167,16 +163,15 @@ public class Metrics {
         while (!filesHolder.isEmpty()) {
             Files temp = filesHolder.pop();
 
-            boolean prgmFile = programFileChecker(temp.name);
 
-            outputter(maxDigits, temp.lines, temp.words, temp.chars, temp.sources, temp.comments, prgmFile);
+            outputter(maxDigits, temp.lines, temp.words, temp.chars, temp.sources, temp.comments, temp.isSource);
 
             int prgmFileCounts = 0;
             if (s) prgmFileCounts++;
             if (C) prgmFileCounts++;
 
             // leave blank space for other prgmFile
-            if (programmingFile && !prgmFile)
+            if (sourceFile && !temp.isSource)
                 for (int i = 0; i < prgmFileCounts; i++)
                     for (int j = 0; j < maxDigits + 1; j++)
                         System.out.print(" ");
